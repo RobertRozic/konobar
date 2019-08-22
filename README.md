@@ -1,4 +1,4 @@
-# spark-2019
+# Konobar
 
 ## Project setup
 ```
