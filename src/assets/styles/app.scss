@@ -1,0 +1,19 @@
+// Bootstrap
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,900&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap&subset=latin-ext');
+
+@import "colors";
+
+html, body {
+  font-family: 'Lato', sans-serif;
+  color: $dark-grey;
+  letter-spacing: 1px;
+}
+
+
+.main-content {
+  min-height: calc(100vh - 120px);
+}
