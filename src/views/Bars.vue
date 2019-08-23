@@ -1,8 +1,6 @@
 <template>
   <div class="curved-wrap">
-    <b-container fluid class="flex-center bars pt-5">
-      Bars
-    </b-container>
+    <bar></bar>
   </div>
 </template>
 

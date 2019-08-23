@@ -13,6 +13,7 @@
     .curved-wrap {
       background-color: #FFF;
       border-radius: 15px 15px 0 0;
-      height: 100vh;
+      padding: 15px 15px 15px 15px;
+      //overflow-y: scroll;
     }
 </style>

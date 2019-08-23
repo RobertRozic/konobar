@@ -27,6 +27,11 @@ export default new Router({
       name: 'Bars',
       component: () => import('./views/Bars.vue')
     },
+    {
+      path: '/thank-you',
+      name: 'Thanks',
+      component: () => import('./views/Thanks.vue')
+    },
     { path: "*",
       component: () => import('./views/PageNotFound.vue')
     }
