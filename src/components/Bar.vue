@@ -1,14 +1,16 @@
 <template>
   <div>
-    <b-container v-for="item in list" data-aos="fade-right" data-aos-duration="700" fluid class="flex-center object caffe-bar">
-      <div class="obj-details">
-        <div class="mb-2">
-          <h5 class="m-0">{{item.name}}</h5>
-          <p class="m-0 grade"><i class="fas fa-star"></i> {{item.grade}}</p>
+    <router-link v-for="item in list" :to="{name: 'Place', params: {id: item.id}}">
+      <b-container data-aos="fade-right" data-aos-duration="700" fluid class="flex-center object caffe-bar">
+        <div class="obj-details">
+          <div class="mb-2">
+            <h5 class="m-0">{{item.name}}</h5>
+            <p class="m-0 grade"><i class="fas fa-star"></i> {{item.grade}}</p>
+          </div>
+          <i class="fas fa-map-marker-alt"></i>&nbsp;<span class="location"> {{item.location}}</span>
         </div>
-        <i class="fas fa-map-marker-alt"></i>&nbsp;<span class="location"> {{item.location}}</span>
-      </div>
-    </b-container>
+      </b-container>
+    </router-link>
   </div>
 </template>
 
@@ -19,16 +21,19 @@ export default {
     return {
       list: [
         {
+          id: '7',
           name: 'Black Pearl',
           location: 'Kralja Tvrtka, Mostar',
           grade: '4.5'
         },
         {
+          id: '8',
           name: 'Ice Bar',
           location: 'Vukovarska, Mostar',
           grade: '4.6'
         },
         {
+          id: '9',
           name: 'Sky Lounge Bar',
           location: 'Braće Fejića, Mostar',
           grade: '4.0'

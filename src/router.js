@@ -32,6 +32,11 @@ export default new Router({
       name: 'Thanks',
       component: () => import('./views/Thanks.vue')
     },
+    {
+      path: '/object/:id',
+      name: 'Place',
+      component: () => import('./views/Object.vue')
+    },
     { path: "*",
       component: () => import('./views/PageNotFound.vue')
     }

@@ -1,9 +1,19 @@
 <template>
     <main id="app">
-        <usernav></usernav>
+        <usernav v-if="$route.name != 'Place'"></usernav>
         <router-view class="main-content"/>
     </main>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+
+        }
+  }
+}
+</script>
 
 <style lang="scss">
     @import "assets/styles/app";
