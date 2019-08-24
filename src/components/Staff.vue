@@ -1,13 +1,16 @@
 <template>
   <div>
-    <b-container v-for="member in list" data-aos="fade" data-aos-duration="700" fluid class="staff-member w-100 py-3 my-3">
-      <img src="../assets/images/face.png" alt="Staff photo" class="staff-photo">
-      <div class="staff-details w-100  ml-3 flex-center">
-        <p class="m-0 w-100 text-left">{{member.position}}</p>
-        <h5 class="w-100 text-left">{{member.name}}</h5>
-      </div>
-      <i class="fas fa-star gray flex-center mr-2"></i>
-    </b-container>
+    <!-- WHEN YOU ADD BACKEND, REMOVE THIS LINK AND ADD A MODAL ASKING FOR THE CODE AND EMAIL IN OBJECT.VUE -->
+    <router-link :to="{ name: 'RateStaff', params: {id: member.id} }" v-for="member in list" class="staffLink">
+      <b-container data-aos="fade" data-aos-duration="700" fluid class="staff-member w-100 py-3 my-3">
+        <img src="../assets/images/face.png" alt="Staff photo" class="staff-photo">
+        <div class="staff-details w-100  ml-3 flex-center">
+          <p class="m-0 w-100 text-left">{{member.position}}</p>
+          <h5 class="w-100 text-left">{{member.name}}</h5>
+        </div>
+        <i class="fas fa-star gray flex-center mr-2"></i>
+      </b-container>
+    </router-link>
   </div>
 </template>
 
@@ -44,10 +47,18 @@ export default {
         },
       ]
     }
+  },
+  methods : {
+    hideCredentialsModal() {
+      this.$refs.rateStaff.hide()
+    }
   }
 }
 </script>
 <style lang="scss">
+  .staffLink {
+    text-decoration: none!important;
+  }
   .staff-photo {
     max-height: 50px;
     max-width: 50px;
@@ -58,6 +69,7 @@ export default {
     flex-direction: column;
     h5 {
       font-weight: 600;
+      color: #434343;
     }
     p {
       font-size: 12px;

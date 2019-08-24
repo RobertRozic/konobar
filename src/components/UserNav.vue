@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
   .brand-name {
-    font-family: 'Rubik', 'sans-serif';
+    font-family: 'Rubik', sans-serif;
   }
   .flex-center {
     display: flex;

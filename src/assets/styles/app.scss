@@ -11,6 +11,8 @@ html, body {
   font-family: 'Roboto', sans-serif;
   color: $dark-grey;
   letter-spacing: 1px;
+  height: 100%;
+  width: 100%;
 }
 
 .main-content {
@@ -55,5 +57,58 @@ html, body {
   div {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+.flat-wrap {
+  min-height: 100vh;
+  background-color: #FFF;
+}
+
+.obj-nav {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.yellow {
+  color: #f5a623;
+}
+.gray {
+  color: #c8c8c8;
+}
+
+.obj-review {
+  outline: none!important;
+  width: 100%;
+  border-radius: 10px;
+  border: .5px solid #eee;
+  padding: 20px;
+  &:focus {
+    border: .5px solid #e7b949 !important;
+  }
+}
+
+//Modal window
+.continue-btn {
+  color: #FFF !important;
+  border-radius: 5px !important;
+  width: 100%;
+  padding: 8px;
+}
+.modal-input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  outline: none!important;
+  margin-bottom: 15px;
+  border: .5px solid #eee;
+  &:focus {
+    border: .5px solid #e7b949 !important;
   }
 }

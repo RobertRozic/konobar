@@ -34,8 +34,18 @@ export default new Router({
     },
     {
       path: '/object/:id',
-      name: 'Place',
+      name: 'Place', //Object is a reserved word
       component: () => import('./views/Object.vue')
+    },
+    {
+      path: '/rate/object/:id',
+      name: 'RateObject',
+      component: () => import('./views/RateObject.vue')
+    },
+    {
+      path: '/rate/staff/:id',
+      name: 'RateStaff',
+      component: () => import('./views/RateStaff.vue')
     },
     { path: "*",
       component: () => import('./views/PageNotFound.vue')

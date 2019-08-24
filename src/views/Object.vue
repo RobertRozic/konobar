@@ -1,7 +1,7 @@
 <template>
   <div class="flat-wrap">
     <div class="obj-nav">
-      <router-link :to="'/'"><i class="fas fa-arrow-left"></i></router-link>
+      <i @click="$router.go(-1)" class="fas fa-arrow-left"></i>
       <p class="m-0">Rate us</p>
       <span></span>
     </div>
@@ -37,26 +37,12 @@
     <b-modal id="credentials" hide-footer centered ref="credentialsRef" title="Please enter your code and email.">
       <input type="text" name="code" class="modal-input" placeholder="Code">
       <input type="email" name="email" class="modal-input" placeholder="E-mail">
-      <b-btn variant="warning" class="continue-btn">Continue</b-btn>
+      <router-link :to="{name: 'RateObject', params: {id: this.$route.params.id}}" class="btn btn-warning continue-btn">Continue</router-link>
     </b-modal>
   </div>
 </template>
 
 <style lang="scss">
-  .flat-wrap {
-    min-height: 100vh;
-    background-color: #FFF;
-  }
-  .obj-nav {
-    display: flex;
-    justify-content: space-between;
-    font-size: 20px;
-    padding: 15px;
-    color: rgba(0, 0, 0, 0.6);
-    a {
-      color: rgba(0, 0, 0, 0.6);
-    }
-  }
   .obj-wrap {
     border-top: .5px solid #eee;
     border-radius: 15px 15px 0 0;
@@ -78,12 +64,6 @@
     p {
       color: rgba(0, 0, 0, 0.5)
     }
-  }
-  .yellow {
-    color: #f5a623;
-  }
-  .gray {
-    color: #c8c8c8;
   }
   .obj-grade {
     display: flex;
@@ -121,25 +101,6 @@
       font-weight: 600;
     }
   }
-
-  //Modal window
-  .continue-btn {
-    color: #FFF !important;
-    border-radius: 5px !important;
-    width: 100%;
-    padding: 8px;
-  }
-  .modal-input {
-    width: 100%;
-    padding: 15px;
-    border-radius: 5px;
-    outline: none!important;
-    margin-bottom: 15px;
-    border: .5px solid #eee;
-    &:focus {
-      border: .5px solid #e7b949 !important;
-    }
-  }
 </style>
 
 <script>
@@ -147,7 +108,7 @@
         name: 'place', //Object is a reserved word
         data() {
             return {
-                content: null
+
             }
         },
         methods : {
@@ -156,7 +117,7 @@
           },
         },
         created() {
-
+          //console.log(this.$route.params.id);
         }
     }
 </script>
