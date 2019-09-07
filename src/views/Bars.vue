@@ -1,26 +1,31 @@
 <template>
   <div class="curved-wrap">
-    <bar></bar>
+    <router-link v-for="item in bars" :to="{name: 'Place', params: {id: item.id}}">
+      <unit :item="item"></unit>
+    </router-link>
   </div>
 </template>
 
-<style lang="scss" scoped>
-  .flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-</style>
 <script>
-    export default {
-        name: 'bars',
-        data() {
-            return {
-                content: null
-            }
-        },
-        created() {
-
+  export default {
+    name: 'bars',
+    data() {
+      return {
+        bars: null
+      }
+    },
+    created() {
+      // Bars, Restaurants, Caffe Bars to same component
+      konobarApi.get('units', {
+        params: {
+          type: 3
         }
+      }).then(response => {
+        if (response.status === 200) {
+          this.bars = response.data;
+        }
+      });
     }
+  }
 </script>
+

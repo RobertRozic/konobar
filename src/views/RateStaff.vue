@@ -7,8 +7,8 @@
     </div>
     <div class="rate-staff h-100 mt-4 flex-center">
       <img src="../assets/images/face.png" alt="Our employee" class="rate-img mb-4">
-      <h5>Employee name</h5>
-      <p class="job-title">job title</p>
+      <h5>{{employee.full_name}}</h5>
+      <p class="job-title">{{employee.title}}</p>
       <p class="mt-4 mb-0">How was your experience?</p>
       <div class="stars my-3 w-100 text-center">
         <i class="fas fa-2x fa-star gray px-2"></i>
@@ -28,17 +28,22 @@
 
 <script>
     export default {
-        name: 'RateStaff',
+        name: 'rate-staff',
         data() {
             return {
-                content: null
+                employee: null
             }
         },
         created() {
-
+          konobarApi.get('employees/' + this.$route.params.id).then(response => {
+            if (response.status === 200) {
+              this.employee = response.data;
+            }
+          });
         }
     }
 </script>
+
 <style lang="scss">
   .staff-review-wrap {
     flex-grow: 1;

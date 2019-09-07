@@ -28,7 +28,6 @@
             }
         },
         created() {
-
         }
     }
 </script>

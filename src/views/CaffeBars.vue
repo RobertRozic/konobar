@@ -1,7 +1,9 @@
 <template>
-  <div class="curved-wrap">
-    <caffebar></caffebar>
-  </div>
+    <div class="curved-wrap">
+        <router-link v-for="item in caffes" :to="{name: 'Place', params: {id: item.id}}">
+            <unit :item="item"></unit>
+        </router-link>
+    </div>
 </template>
 
 <script>
@@ -9,11 +11,20 @@
         name: 'caffe-bars',
         data() {
             return {
-                content: null
+                caffes: null
             }
         },
         created() {
-
+            // Bars, Restaurants, Caffe Bars to same component
+            konobarApi.get('units', {
+                params: {
+                    type: 2
+                }
+            }).then(response => {
+                if (response.status === 200) {
+                    this.caffes = response.data;
+                }
+            });
         }
     }
 </script>

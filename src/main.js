@@ -5,7 +5,7 @@ import 'aos/dist/aos.css'
 import router from './router'
 import store from './store'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 // Bootstrap vue
 import BootstrapVue from 'bootstrap-vue'
@@ -13,7 +13,7 @@ Vue.use(BootstrapVue);
 
 // Axios
 window.axios = require('axios');
-//window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Accept'] = 'application/json';
 
 // API
@@ -35,4 +35,4 @@ new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
