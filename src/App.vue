@@ -67,8 +67,11 @@
                 }
             );
         },
-        mounted() {
-            this.$store.dispatch('getUser');
+        watch: {
+            isAdmin: function (newVal) {
+                if (newVal.length > 0)
+                    this.$store.dispatch('getUser');
+            }
         }
     }
 </script>
