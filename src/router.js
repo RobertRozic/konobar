@@ -13,6 +13,31 @@ export default new Router({
       redirect: '/restaurants'
     },
     {
+      path: '/admin',
+      name: 'Admin',
+      component: () => import('./views/admin/Home.vue')
+    },
+    {
+      path: '/admin/users',
+      name: 'Users',
+      component: () => import('./views/admin/Users.vue')
+    },
+    {
+      path: '/admin/employees',
+      name: 'Employees',
+      component: () => import('./views/admin/Employees.vue')
+    },
+    {
+      path: '/admin/units',
+      name: 'Units',
+      component: () => import('./views/admin/Units.vue')
+    },
+    {
+      path: '/admin/login',
+      name: 'Login',
+      component: () => import('./views/admin/Login.vue')
+    },
+    {
       path: '/restaurants',
       name: 'Restaurants',
       component: () => import('./views/Restaurants.vue')

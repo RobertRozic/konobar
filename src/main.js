@@ -11,6 +11,10 @@ Vue.config.productionTip = false;
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
+// Use Vue cookie to store Bearer
+var VueCookie = require('vue-cookie');
+Vue.use(VueCookie);
+
 // Axios
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -24,6 +28,9 @@ window.konobarApi = axios.create({
   baseURL: api.apiDomain,
   timeout: 5000
 });
+
+// Event bus
+window.eventBus = new Vue();
 
 // Components
 import '@/components'
