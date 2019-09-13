@@ -17,6 +17,9 @@ html, body {
 
 .main-content {
   min-height: calc(100vh - 101px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .flex-center {
@@ -120,4 +123,31 @@ html, body {
 
 .rounded {
   border-radius: 10px;
+}
+
+/* Rating stars */
+.stars {
+  &:hover {
+    cursor: pointer;
+    i {
+      color: #f5a623;
+    }
+  }
+  i:hover~i {
+    cursor: pointer;
+    color: #c8c8c8;
+  }
+}
+
+.border-top-grey {
+  border-top: .5px solid #eee;
+}
+
+a {
+  color: #32323C;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: #32323C;
+  }
 }

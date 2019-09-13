@@ -3,9 +3,11 @@
         <img src="../assets/images/face.png" alt="Staff photo" class="staff-photo">
         <div class="staff-details w-100  ml-3 flex-center">
             <p class="m-0 w-100 text-left">{{item.title}}</p>
-            <h5 class="w-100 text-left">{{item.first_name}} {{item.last_name}}</h5>
+            <h5 class="w-100 text-left">{{item.full_name}}</h5>
         </div>
-        <i class="fas fa-star gray flex-center mr-2"></i>
+        <i class="fas fa-star flex-center mr-2" :class="user ? 'yellow ': 'gray'">
+        </i>
+        <span v-if="user" class="flex-center font-weight-bold yellow mt-1">{{item.average_rating}}</span>
     </b-container>
 </template>
 
@@ -15,6 +17,11 @@
             'item': {
                 type: Object
             }
-        }
+        },
+        computed: {
+            user() {
+                return this.$store.getters.loggedUser;
+            }
+        },
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <b-container v-if="user.role_id === 1">
+    <b-container>
         <b-row>
             <b-col cols="12" class="p-2 d-flex justify-content-between">
                 <h1 class="text-white">Users</h1>

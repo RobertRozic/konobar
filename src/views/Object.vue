@@ -24,21 +24,22 @@
                 </div>
                 <p class="review-num m-0">{{unit.review_count}} reviews</p>
             </div>
-            <b-btn variant="warning" class="w-100 rate-btn my-4" v-b-modal.credentials>Rate object</b-btn>
+            <b-btn variant="warning" class="w-100 rate-btn my-4" @click="unitClick" v-b-modal.credentials>Rate object</b-btn>
             <b-container fluid class="employees-wrap mt-4 p-0 w-100 d-flex">
                 <p class="mb-0 mt-4">Employees</p>
                 <h5 class="mb-4">Rate our service</h5>
-                <router-link v-for="member in unit.employees"
-                             :to="{ name: 'RateStaff', params: {id: member.id} }"
-                             class="staffLink">
-                    <employee :item="member"></employee>
-                </router-link>
+                <employee v-for="member in unit.employees"
+                          @click.native="employeeClick(member.id)"
+                          v-b-modal.credentials
+                          :item="member"></employee>
             </b-container>
         </div>
         <b-modal id="credentials" hide-footer centered ref="credentialsRef" title="Please enter your code and email.">
-            <input type="text" name="code" class="modal-input" placeholder="Code">
-            <input type="email" name="email" class="modal-input" placeholder="E-mail">
-            <router-link :to="{name: 'RateObject', params: {id: this.$route.params.id}}" class="btn btn-warning continue-btn">Continue</router-link>
+            <b-form v-on:submit.prevent="verifyRate">
+                <input type="text" v-model="form.code" name="code" class="modal-input" placeholder="Code">
+                <input type="email" v-model="form.email" name="email" class="modal-input" placeholder="E-mail">
+                <button type="submit" class="btn btn-warning continue-btn">Continue</button>
+            </b-form>
         </b-modal>
     </div>
 </template>
@@ -48,12 +49,39 @@
         name: 'unit',
         data() {
             return {
-                unit: null
+                unit: null,
+                form: {}
             }
         },
         methods : {
             hideCredentialsModal() {
                 this.$refs.credentialsRef.hide()
+            },
+            employeeClick(id) {
+                this.form.type = 'employee';
+                this.form.employee_id = id;
+            },
+            unitClick() {
+                this.form.type = 'unit';
+                this.form.unit_id = this.unit.id;
+            },
+            verifyRate() {
+                if (this.form.type === 'unit') {
+                    this.$router.push('/rate/object/' + this.unit.id);
+                } else if (this.form.type === 'employee') {
+                    this.$router.push('/rate/staff/' + this.form.employee_id);
+                }
+                /*konobarApi.post('/rate', this.form).then(response => {
+                    if (response.status === 200) {
+                        this.$store.dispatch('setRate', response.data);
+                        let data = response.data;
+                        if (response.data.type === 'unit') {
+                            this.$router.push('/rate/object/' + data.unit_id);
+                        } else if (response.data.type === 'employee') {
+                            this.$router.push('/rate/staff/' + data.employee_id);
+                        }
+                    }
+                });*/
             },
         },
         created() {

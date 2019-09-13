@@ -1,8 +1,8 @@
 <template>
     <main id="app">
-        <usernav v-if="!['Place', 'RateObject', 'RateStaff'].includes($route.name) && !isAdmin"></usernav>
-        <admin-nav v-if="isAdmin && !isAuth" :items="nav"></admin-nav>
-        <router-view class="main-content p-2"/>
+        <!--<usernav v-if="!['Place', 'RateObject', 'RateStaff'].includes($route.name) && !isAdmin"></usernav>-->
+        <navbar v-if="!isAuth" :items="nav"></navbar>
+        <router-view class="main-content"/>
     </main>
 </template>
 
@@ -10,25 +10,46 @@
     export default {
         data() {
             return {
-                nav: [
-                    {
-                        title: 'home',
-                        href: '/admin'
-                    },
-                    {
-                        title: 'users',
-                        admin: true,
-                        href: '/admin/users'
-                    },
-                    {
-                        title: 'units',
-                        href: '/admin/units'
-                    },
-                    {
-                        title: 'employees',
-                        href: '/admin/employees'
-                    },
-                ]
+                nav: {
+                    admin: [
+                        {
+                            title: 'users',
+                            href: '/admin/users'
+                        },
+                        {
+                            title: 'units',
+                            href: '/admin/units'
+                        },
+                        {
+                            title: 'employees',
+                            href: '/admin/employees'
+                        }
+                    ],
+                    owner: [
+                        {
+                            title: 'dashboard',
+                            href: '/admin'
+                        },
+                        {
+                            title: 'employees',
+                            href: '/admin/employees'
+                        }
+                    ],
+                    guest: [
+                        {
+                            title: 'Restaurants',
+                            href: '/restaurants'
+                        },
+                        {
+                            title: 'Caffe Bars',
+                            href: '/caffe-bars'
+                        },
+                        {
+                            title: 'Bars',
+                            href: '/bars'
+                        }
+                    ]
+                }
             }
         },
         computed: {
@@ -38,6 +59,9 @@
             isAdmin () {
                 return this.$route.path.match('admin');
             }
+        },
+        mounted() {
+
         },
         created() {
             let self = this;
@@ -79,15 +103,21 @@
 <style lang="scss">
     @import "assets/styles/app";
 
-    body {
+    .bg-blue {
         background-color: #3d35d0;
+        color: #FFF
     }
+
+    .bg-white {
+        background-color: #3d35d0;
+        color: #32323C;
+    }
+
     .curved-wrap {
-        background-color: #FFF;
         border-radius: 15px 15px 0 0;
         padding: 15px 15px 15px 15px;
-        //overflow-y: scroll;
     }
+
     .fa-arrow-left {
         cursor: pointer;
     }

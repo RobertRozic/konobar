@@ -1,50 +1,36 @@
 <template>
-    <div v-if="user">
-        <div v-if="user.role_id === 1" class="curved-wrap p-4 position-relative">
-            <router-link v-for="item in employees" :to="$route.path + '/' + item.id">
-                <employee  :item="item"></employee>
-            </router-link>
-            <b-btn variant="primary"
-                   class="add-fab"
-                   v-b-modal.new-employee>
-                <i class="fas fa-plus"></i>
-            </b-btn>
-        </div>
-        <div v-else-if="user.role_id = 2">
-            <b-container>
-                <b-row>
-                    <b-col cols="12" class="p-2 d-flex justify-content-between">
-                        <h1 class="text-white">Employees</h1>
-                        <div class="w-25 flex-center">
-                            <b-btn variant="primary"
-                                   class="w-100"
-                                   v-b-modal.new-employee>New</b-btn>
-                        </div>
-                    </b-col>
-                    <b-col>
-                        <konobar-table
-                                position
-                                :items="employees"
-                                :fields="fields"
-                                :search-keys="searchKeys"
-                                class="white-bg">
-                        </konobar-table>
-                    </b-col>
-                </b-row>
-            </b-container>
-        </div>
-        <b-modal centered
-                 ref="new-employee"
-                 title="New employee"
-                 id="new-employee">
-            <konobar-form
-                    :fields="formFields"
-                    submit="Create"
-                    post="employees"
-                    @success="formSuccess">
-            </konobar-form>
-        </b-modal>
-    </div>
+    <b-container>
+        <b-row>
+            <b-col cols="12" class="p-2 d-flex justify-content-between">
+                <h1 class="text-white">Employees</h1>
+                <div class="w-25 flex-center">
+                    <b-btn variant="primary"
+                           class="w-100"
+                           v-b-modal.new-employee>New</b-btn>
+                </div>
+            </b-col>
+            <b-col>
+                <konobar-table
+                        position
+                        :items="employees"
+                        :fields="fields"
+                        :search-keys="searchKeys"
+                        class="white-bg">
+                </konobar-table>
+            </b-col>
+            <b-modal centered
+                     ref="new-employee"
+                     title="New employee"
+                     id="new-employee">
+                <konobar-form
+                        :fields="formFields"
+                        submit="Create"
+                        post="employees"
+                        @success="formSuccess">
+                </konobar-form>
+            </b-modal>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
@@ -106,11 +92,6 @@
                 ]
             }
         },
-        computed: {
-            user() {
-                return this.$store.getters.loggedUser;
-            }
-        },
         methods: {
             getEmployees() {
                 konobarApi.get('employees').then(response => {
@@ -140,15 +121,3 @@
         }
     }
 </script>
-
-<style lang="scss">
-    .add-fab {
-        position: fixed;
-        right: 24px;
-        bottom: 24px;
-        z-index: 9999;
-        border-radius: 100%;
-        width: 50px;
-        height: 50px;
-    }
-</style>

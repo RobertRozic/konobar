@@ -11,6 +11,10 @@ import KonobarForm from './KonobarForm';
 import KonobarTable from './KonobarTable';
 import AdminNav from './AdminNav';
 
+import Navbar from './Navbar';
+import UnitDetails from "./UnitDetails";
+import Review from "./Review";
+
 Vue.component('usernav', UserNav);
 Vue.component('restaurant', Restaurant);
 Vue.component('caffebar', CaffeBar);
@@ -22,3 +26,7 @@ Vue.component('employee', Employee);
 Vue.component('konobar-form', KonobarForm);
 Vue.component('konobar-table', KonobarTable);
 Vue.component('admin-nav', AdminNav);
+
+Vue.component('navbar', Navbar);
+Vue.component('unit-details', UnitDetails);
+Vue.component('review', Review);

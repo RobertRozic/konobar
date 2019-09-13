@@ -7,16 +7,23 @@ export default new Vuex.Store({
     modules: {
     },
     state: {
-        user: null
+        user: null,
+        rate: null
     },
     getters: {
         loggedUser (state) {
             return state.user
+        },
+        rate(state) {
+            return state.rate
         }
     },
     mutations: {
         setUser (state, user) {
             state.user = user
+        },
+        setRate (state, rate) {
+            state.rate = rate
         }
     },
     actions: {
@@ -26,6 +33,9 @@ export default new Vuex.Store({
                     commit('setUser', response.data);
                 }
             })
+        },
+        setRate({commit}, payload) {
+            return commit('setRate', payload);
         }
     }
 })
