@@ -1,29 +1,31 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+    plugins: [createPersistedState()],
     modules: {
     },
     state: {
         user: null,
-        rate: null
+        review: null
     },
     getters: {
         loggedUser (state) {
             return state.user
         },
-        rate(state) {
-            return state.rate
+        getReview(state) {
+            return state.review
         }
     },
     mutations: {
         setUser (state, user) {
             state.user = user
         },
-        setRate (state, rate) {
-            state.rate = rate
+        setReview (state, review) {
+            state.review = review
         }
     },
     actions: {
@@ -34,8 +36,8 @@ export default new Vuex.Store({
                 }
             })
         },
-        setRate({commit}, payload) {
-            return commit('setRate', payload);
+        setReview({commit}, payload) {
+            return commit('setReview', payload);
         }
     }
 })

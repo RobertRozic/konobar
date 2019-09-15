@@ -3,7 +3,7 @@
         <div class="obj-details">
             <div class="mb-2">
                 <h5 class="m-0">{{item.name}}</h5>
-                <p class="m-0 grade"><i class="fas fa-star"></i> {{item.average_rating}}</p>
+                <p class="m-0 grade"><i class="fas fa-star yellow"></i> {{item.average_rating}}</p>
             </div>
             <i class="fas fa-map-marker-alt"></i>&nbsp;<span class="location">{{item.address}}, {{item.township.name}} </span>
         </div>

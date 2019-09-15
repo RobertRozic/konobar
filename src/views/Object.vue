@@ -58,30 +58,25 @@
                 this.$refs.credentialsRef.hide()
             },
             employeeClick(id) {
-                this.form.type = 'employee';
+                this.form.unit_id = null;
                 this.form.employee_id = id;
             },
             unitClick() {
-                this.form.type = 'unit';
+                this.form.employee_id = null;
                 this.form.unit_id = this.unit.id;
             },
             verifyRate() {
-                if (this.form.type === 'unit') {
-                    this.$router.push('/rate/object/' + this.unit.id);
-                } else if (this.form.type === 'employee') {
-                    this.$router.push('/rate/staff/' + this.form.employee_id);
-                }
-                /*konobarApi.post('/rate', this.form).then(response => {
+                konobarApi.post('/reviews/permission', this.form).then(response => {
                     if (response.status === 200) {
-                        this.$store.dispatch('setRate', response.data);
                         let data = response.data;
-                        if (response.data.type === 'unit') {
-                            this.$router.push('/rate/object/' + data.unit_id);
-                        } else if (response.data.type === 'employee') {
-                            this.$router.push('/rate/staff/' + data.employee_id);
+                        if (data.permission) {
+                            this.$store.dispatch('setReview', response.data);
+                            this.$router.push('/review');
+                        } else {
+                            console.log("Error!");
                         }
                     }
-                });*/
+                });
             },
         },
         created() {

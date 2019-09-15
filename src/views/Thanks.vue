@@ -20,33 +20,3 @@
         }
     }
 </script>
-
-<style lang="scss">
-  .full {
-    width: 100vw;
-    flex-direction: column;
-    position: absolute;
-    z-index: 999;
-    top: 0;
-    background-color: #3d35d0;
-    img {
-      max-height: 250px;
-    }
-    h5 {
-      font-weight: 600;
-      color: #FFF;
-    }
-    p {
-      text-align: center;
-      color: #FFF;
-      font-size: 12px;
-      font-weight: 100;
-    }
-    a {
-      background-color: #e7b949!important;
-      border-radius: 7px !important;
-      color: #FFF !important;
-      width: 250px;
-    }
-  }
-</style>

@@ -73,14 +73,14 @@ export default new Router({
             component: () => import('./views/Object.vue')
         },
         {
-            path: '/rate/object/:id',
-            name: 'RateObject',
-            component: () => import('./views/RateObject.vue')
+            path: '/review',
+            name: 'WriteReview',
+            component: () => import('./views/WriteReview.vue')
         },
         {
-            path: '/rate/staff/:id',
-            name: 'RateStaff',
-            component: () => import('./views/RateStaff.vue')
+            path: '/reviews/verify/:token',
+            name: 'VerifyReview',
+            component: () => import('./views/VerifyReview.vue')
         },
         { path: "*",
             component: () => import('./views/PageNotFound.vue')
