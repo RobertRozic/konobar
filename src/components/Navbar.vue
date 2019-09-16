@@ -43,7 +43,7 @@
                 return this.$store.getters.loggedUser;
             },
             nav() {
-                if (this.user == null) {
+                if (this.user == null || !this.$parent.isAdmin) {
                     return this.items.guest;
                 }
                 switch (this.user.role_id) {

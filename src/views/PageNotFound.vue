@@ -8,7 +8,7 @@
 
 <style lang="scss" scoped>
     .not-found {
-      height: calc(100vh - 101px);
+      height: 100vh;
       width: 100vw;
       display: flex;
       justify-content: center;
