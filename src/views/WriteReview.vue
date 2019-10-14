@@ -14,7 +14,7 @@
         </div>
         <div class="rate-staff h-100 mt-4 flex-center">
             <template v-if="employee">
-                <img src="../assets/images/face.png" alt="Our employee" class="rate-img mb-4">
+                <img :src="storage + employee.images[0].path" alt="Our employee" class="rate-img mb-4">
                 <h5>{{employee.full_name}}</h5>
                 <p class="job-title">{{employee.title}}</p>
             </template>
@@ -52,6 +52,9 @@
         computed: {
             review() {
                 return this.$store.getters.getReview;
+            },
+            storage() {
+                return api.storage;
             }
         },
         methods: {

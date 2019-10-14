@@ -1,5 +1,6 @@
 <template>
-    <b-container data-aos="fade-right" data-aos-duration="700" fluid class="flex-center object caffe-bar">
+    <b-container data-aos="fade-right" data-aos-duration="700" fluid class="flex-center object unit"
+        :style="item.images.length > 0 ? 'background-image: url(' + storage + item.images[0] + ');' : ''">
         <div class="obj-details">
             <div class="mb-2">
                 <h5 class="m-0">{{item.name}}</h5>
@@ -18,14 +19,18 @@
                 type: Object
             }
         },
+        computed: {
+            storage() {
+                return api.storage;
+            }
+        },
     }
 </script>
 
 <style lang="scss" scoped>
     //HERE BECAUSE VUE TAKES A SHIT WITH BACKGROUND IMAGE LINKS
     /// Fix this
-    .caffe-bar {
-        background-image: url('../assets/images/bars.jpg');
+    .unit {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

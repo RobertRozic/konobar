@@ -7,8 +7,8 @@
                 <span></span>
             </div>
             <div class="flex-center flex-column">
-                <div>
-                    <b-img :src="require('@/assets/images/face.png')" alt="Staff photo" class="staff-photo"></b-img>
+                <div v-if="employee.images.length > 0">
+                    <b-img :src="storage + employee.images[0].path" alt="Staff photo" class="staff-photo"></b-img>
                 </div>
                 <h5 class="mt-4 mb-1 font-weight-bold">{{employee.full_name}}</h5>
                 <h6 class="gray">{{employee.title}}</h6>
@@ -24,6 +24,7 @@
             <h6 class="font-weight-bold">Comments and ratings.</h6>
             <div>Read all comments from this month.</div>
             <review v-for="review in employee.reviews"
+                    :key="review.id"
                     :item="review"
                     class="my-3">
             </review>
@@ -36,6 +37,11 @@
         data() {
             return {
                 employee: null
+            }
+        },
+        computed: {
+            storage() {
+                return api.storage;
             }
         },
         created() {

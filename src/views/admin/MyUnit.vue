@@ -7,9 +7,6 @@
                 <span></span>
             </div>
             <div class="flex-center flex-column">
-                <div>
-                    <b-img :src="require('@/assets/images/face.png')" alt="Staff photo" class="staff-photo"></b-img>
-                </div>
                 <unit-details :unit="unit" :key="unit.id" class="w-100"></unit-details>
             </div>
         </div>

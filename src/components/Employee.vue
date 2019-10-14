@@ -1,6 +1,6 @@
 <template>
     <b-container v-if="item" data-aos="fade" data-aos-duration="700" fluid class="staff-member w-100 py-3 my-3">
-        <img src="../assets/images/face.png" alt="Staff photo" class="staff-photo">
+        <img v-if="item.images.length > 0" :src="storage + item.images[0].path" alt="Staff photo" class="staff-photo">
         <div class="staff-details w-100  ml-3 flex-center">
             <p class="m-0 w-100 text-left">{{item.title}}</p>
             <h5 class="w-100 text-left">{{item.full_name}}</h5>
@@ -21,7 +21,41 @@
         computed: {
             user() {
                 return this.$store.getters.loggedUser;
+            },
+            storage() {
+                return api.storage;
             }
         },
     }
 </script>
+
+<style lang="scss">
+    .staffLink {
+        text-decoration: none!important;
+    }
+    .staff-photo {
+        max-height: 50px;
+        max-width: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .staff-details {
+        flex-direction: column;
+        h5 {
+            font-weight: 600;
+            color: #434343;
+        }
+        p {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+    .staff-member {
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+        -moz-box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+        box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+        display: flex;
+        justify-content: space-between;
+    }
+</style>

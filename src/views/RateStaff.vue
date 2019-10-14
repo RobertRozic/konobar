@@ -6,7 +6,7 @@
             <span></span>
         </div>
         <div class="rate-staff h-100 mt-4 flex-center">
-            <img src="../assets/images/face.png" alt="Our employee" class="rate-img mb-4">
+            <img v-if="employee.images.length > 0" :src="storage + employee.images[0].path" alt="Our employee" class="rate-img mb-4">
             <h5>{{employee.full_name}}</h5>
             <p class="job-title">{{employee.title}}</p>
             <p class="mt-4 mb-0">How was your experience?</p>
@@ -36,8 +36,13 @@
                 form: {
                     message: '',
                     rating: 0,
-                    email: 'r.rozic97@gmail.com'
+                    email: ''
                 }
+            }
+        },
+        computed: {
+            storage() {
+                return api.storage;
             }
         },
         methods: {
