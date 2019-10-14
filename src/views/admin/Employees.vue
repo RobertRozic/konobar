@@ -1,7 +1,7 @@
 <template>
     <div v-if="user">
         <div v-if="user.role_id === 1" class="curved-wrap p-4 position-relative">
-            <router-link v-for="item in employees" :to="$route.path + '/' + item.id">
+            <router-link v-for="item in employees" :to="$route.path + '/' + item.id" :key="item.full_name">
                 <employee  :item="item"></employee>
             </router-link>
             <b-btn variant="primary"
@@ -34,6 +34,7 @@
             </b-container>
         </div>
         <b-modal centered
+                 hide-footer
                  ref="new-employee"
                  title="New employee"
                  id="new-employee">
@@ -69,8 +70,7 @@
                     {
                         key: 'average_rating',
                         sortable: true
-                    },
-
+                    }
                 ],
                 searchKeys: [
                     'first_name',
@@ -102,7 +102,15 @@
                         label: 'Title',
                         type: 'text',
                         required: true
-                    }
+                    },
+                    {
+                        key: 'images',
+                        label: 'Images',
+                        type: 'file',
+                        multiple: true,
+                        required: true
+                    },
+
                 ]
             }
         },

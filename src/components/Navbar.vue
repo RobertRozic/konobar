@@ -3,13 +3,16 @@
         <b-container fluid class="px-3 nav1">
             <b-row>
                 <b-col cols="4" offset="4" class="flex-center">
-                    <h5 class="brand-name m-0">ratemate</h5>
+                    <router-link to="/"><h5 class="brand-name m-0">ratemate</h5></router-link>
                 </b-col>
                 <b-col cols="4" class="flex-center">
                     <b-dropdown v-if="user" variant="div" right no-caret>
                         <template v-slot:button-content>
-                            Image<span class="sr-only">Search</span>
+                            <span class="text-white">{{user.full_name}}</span>
                         </template>
+                        <b-dropdown-item @click="goToAdmin">
+                            Admin
+                        </b-dropdown-item>
                         <b-dropdown-item @click="logout">
                             Odjava
                         </b-dropdown-item>
@@ -32,10 +35,48 @@
 
 <script>
     export default {
-        props: {
-            items: {
-                type: Object,
-                default: null
+        data() {
+            return {
+                items: {
+                    admin: [
+                        {
+                            title: 'users',
+                            href: '/admin'
+                        },
+                        {
+                            title: 'units',
+                            href: '/admin/units'
+                        },
+                        {
+                            title: 'employees',
+                            href: '/admin/employees'
+                        }
+                    ],
+                    owner: [
+                        {
+                            title: 'dashboard',
+                            href: '/admin'
+                        },
+                        {
+                            title: 'employees',
+                            href: '/admin/employees'
+                        }
+                    ],
+                    guest: [
+                        {
+                            title: 'Restaurants',
+                            href: '/restaurants'
+                        },
+                        {
+                            title: 'Caffe Bars',
+                            href: '/caffe-bars'
+                        },
+                        {
+                            title: 'Bars',
+                            href: '/bars'
+                        }
+                    ]
+                }
             }
         },
         computed: {
@@ -65,6 +106,9 @@
                         self.$router.push({path: '/admin/login'});
                     }
                 })
+            },
+            goToAdmin() {
+                this.$router.push('/admin');
             }
         }
     }

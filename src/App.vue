@@ -1,57 +1,13 @@
 <template>
     <main id="app">
         <!--<usernav v-if="!['Place', 'RateObject', 'RateStaff'].includes($route.name) && !isAdmin"></usernav>-->
-        <navbar v-if="!isAuth" :items="nav"></navbar>
+        <navbar v-if="!isAuth"></navbar>
         <router-view class="main-content"/>
     </main>
 </template>
 
 <script>
     export default {
-        data() {
-            return {
-                nav: {
-                    admin: [
-                        {
-                            title: 'users',
-                            href: '/admin/users'
-                        },
-                        {
-                            title: 'units',
-                            href: '/admin/units'
-                        },
-                        {
-                            title: 'employees',
-                            href: '/admin/employees'
-                        }
-                    ],
-                    owner: [
-                        {
-                            title: 'dashboard',
-                            href: '/admin'
-                        },
-                        {
-                            title: 'employees',
-                            href: '/admin/employees'
-                        }
-                    ],
-                    guest: [
-                        {
-                            title: 'Restaurants',
-                            href: '/restaurants'
-                        },
-                        {
-                            title: 'Caffe Bars',
-                            href: '/caffe-bars'
-                        },
-                        {
-                            title: 'Bars',
-                            href: '/bars'
-                        }
-                    ]
-                }
-            }
-        },
         computed: {
             isAuth () {
                 return this.$route.path.match('login');
@@ -59,9 +15,6 @@
             isAdmin () {
                 return this.$route.path.match('admin');
             }
-        },
-        mounted() {
-
         },
         created() {
             let self = this;

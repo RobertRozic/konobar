@@ -3,7 +3,7 @@
         <b-row>
             <b-col cols="12" class="p-2 d-flex justify-content-between">
                 <h1 class="text-white">Units</h1>
-                <div class="w-25 flex-center" v-if="user.role_id === 1">
+                <div class="w-25 flex-center" v-if="user.role_id === 2">
                     <b-btn variant="primary"
                            class="w-100"
                            v-b-modal.new-unit>New</b-btn>
@@ -19,7 +19,9 @@
                 </konobar-table>
             </b-col>
         </b-row>
-        <b-modal centered
+        <b-modal v-if="user.role_id === 2"
+                 centered
+                 hide-footer
                  ref="new-unit"
                  title="New unit"
                  id="new-unit">
@@ -104,6 +106,13 @@
                         key: 'code',
                         label: 'Code',
                         type: 'text',
+                        required: true
+                    },
+                    {
+                        key: 'images',
+                        label: 'Images',
+                        type: 'file',
+                        multiple: true,
                         required: true
                     },
                 ]

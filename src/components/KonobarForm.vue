@@ -1,5 +1,5 @@
 <template>
-    <b-form v-on:submit.prevent="action" class="flex-center flex-column konobar-form">
+    <b-form v-on:submit.prevent="action" enctype="multipart/form-data" class="flex-center flex-column konobar-form">
         <template v-for="field in fields" >
             <input v-if="field.type==='hidden'"
                    type="hidden"
@@ -17,6 +17,7 @@
                 <b-form-select v-if="field.type==='select'"
                                :id="field.key"
                                :name="field.key"
+                               :required="field.required"
                                v-model="form[field.key]"
                                :options="field.options">
                 </b-form-select>
@@ -25,9 +26,22 @@
                                  :id="field.key"
                                  :name="field.key"
                                  :placeholder="field.placeholder"
+                                 :required="field.required"
                                  v-model="form[field.key]"
                                  rows="3">
                 </b-form-textarea>
+
+                <b-form-file
+                        v-else-if="field.type==='file'"
+                        :state="Boolean(form[field.key])"
+                        :id="field.key"
+                        :name="field.key + (field.multiple ? '[]' : '')"
+                        :placeholder="field.placeholder"
+                        v-model="form[field.key]"
+                        :required="field.required"
+                        :multiple="field.multiple"
+                        :file-name-formatter="formatNames">
+                </b-form-file>
 
                 <b-form-input  v-else
                                :id="field.key"
@@ -67,9 +81,10 @@
             }
         },
         methods: {
-            action() {
+            action(e) {
+                const formData = new FormData(e.target);
                 let self = this;
-                konobarApi.post(this.post, this.form).then(response => {
+                konobarApi.post(this.post, formData).then(response => {
                     if (response.status === 200 || response.status === 201) {
                         if (response.data.access_token)
                             self.$cookie.set('auth_token', response.data.access_token);
@@ -78,6 +93,13 @@
                             self.$router.push({path: self.redirectTo});
                     }
                 })
+            },
+            formatNames(files) {
+                if (files.length === 1) {
+                    return files[0].name
+                } else {
+                    return `${files.length} files selected`
+                }
             }
         },
         mounted() {
