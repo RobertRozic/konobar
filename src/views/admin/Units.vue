@@ -15,22 +15,39 @@
                         :items="units"
                         :fields="fields"
                         :search-keys="searchKeys"
+                        @rowClicked="editUnit"
                         class="white-bg">
                 </konobar-table>
             </b-col>
         </b-row>
-        <b-modal v-if="user.role_id === 2"
-                 centered
-                 hide-footer
-                 ref="new-unit"
-                 title="New unit"
-                 id="new-unit">
-            <konobar-form :fields="formFields"
-                          submit="Create"
-                          post="units"
-                          @success="formSuccess">
-            </konobar-form>
-        </b-modal>
+        <template v-if="user.role_id === 2">
+            <b-modal
+                    centered
+                    hide-footer
+                    ref="new-unit"
+                    title="New unit"
+                    id="new-unit">
+                <konobar-form :fields="formFields"
+                              submit="Create"
+                              post="units"
+                              @success="formSuccess">
+                </konobar-form>
+            </b-modal>
+            <b-modal centered
+                     hide-footer
+                     ref="edit-unit"
+                     title="Edit unit"
+                     id="edit-unit">
+                <konobar-form
+                        v-if="selectedUnit"
+                        :fields="formFields"
+                        submit="Update"
+                        :post="'units' + '/' + selectedUnit.id"
+                        :item="selectedUnit"
+                        @success="formSuccess">
+                </konobar-form>
+            </b-modal>
+        </template>
     </b-container>
 </template>
 
@@ -38,6 +55,7 @@
     export default {
         data() {
             return {
+                selectedUnit: null,
                 units: [],
                 owners: [],
                 townships: [],
@@ -113,7 +131,7 @@
                         label: 'Images',
                         type: 'file',
                         multiple: true,
-                        required: true
+                        //required: true
                     },
                 ]
             }
@@ -133,6 +151,11 @@
             formSuccess() {
                 this.getUnits();
                 this.$refs['new-unit'].hide();
+                this.$refs['edit-unit'].hide();
+            },
+            editUnit(id) {
+                this.selectedUnit = this.units.find(unit => {return unit.id === id});
+                this.$refs['edit-unit'].show();
             }
         },
         created() {

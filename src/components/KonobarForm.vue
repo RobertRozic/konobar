@@ -73,6 +73,9 @@
             },
             redirectTo: {
                 type: String
+            },
+            item: {
+                type: Object
             }
         },
         data () {
@@ -111,7 +114,10 @@
                 if (item.type === 'hidden') {
                     self.form[item.key] = item.value;
                 }
-            })
+            });
+            if (this.item != null) {
+                this.form = this.item;
+            }
         }
     }
 </script>

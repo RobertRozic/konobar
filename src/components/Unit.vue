@@ -1,6 +1,6 @@
 <template>
     <b-container data-aos="fade-right" data-aos-duration="700" fluid class="flex-center object unit"
-        :style="item.images.length > 0 ? 'background-image: url(' + storage + item.images[0] + ');' : ''">
+        :style="item.images.length > 0 ? 'background-image: url(' + storage + item.images[0].path + ');' : ''">
         <div class="obj-details">
             <div class="mb-2">
                 <h5 class="m-0">{{item.name}}</h5>
