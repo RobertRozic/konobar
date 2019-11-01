@@ -15,6 +15,7 @@
                         :items="users"
                         :fields="fields"
                         :search-keys="searchKeys"
+                        @rowClicked="editUser"
                         class="white-bg">
                 </konobar-table>
             </b-col>
@@ -28,6 +29,20 @@
                               @success="formSuccess">
                 </konobar-form>
             </b-modal>
+            <b-modal centered
+                     hide-footer
+                     ref="edit-user"
+                     title="Edit user"
+                     id="edit-user">
+                <konobar-form
+                        v-if="selectedUser"
+                        :fields="formFields"
+                        submit="Update"
+                        :post="'users' + '/' + selectedUser.id"
+                        :item="selectedUser"
+                        @success="formSuccess">
+                </konobar-form>
+            </b-modal>
         </b-row>
     </b-container>
 </template>
@@ -36,6 +51,7 @@
     export default {
         data() {
             return {
+                selectedUser: null,
                 users: [],
                 fields: [
                     {
@@ -114,6 +130,10 @@
             formSuccess() {
                 this.getUsers();
                 this.$refs['new-user'].hide();
+            },
+            editUser(id) {
+                this.selectedUser = this.users.find(user => {return user.id === id});
+                this.$refs['edit-user'].show();
             }
         },
         created() {

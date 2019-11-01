@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import adminRoutes from '@/views/admin/router';
+
 Vue.use(Router)
 
 export default new Router({
@@ -8,44 +10,10 @@ export default new Router({
     linkActiveClass: 'active',
     base: process.env.BASE_URL,
     routes: [
+        ...adminRoutes,
         {
             path: '/',
             redirect: '/restaurants'
-        },
-        {
-            path: '/admin',
-            name: 'Admin',
-            component: () => import('./views/admin/Home.vue')
-        },
-        {
-            path: '/admin/users',
-            name: 'Users',
-            component: () => import('./views/admin/Users.vue')
-        },
-        {
-            path: '/admin/employees',
-            name: 'MyEmployees',
-            component: () => import('./views/admin/Employees.vue')
-        },
-        {
-            path: '/admin/my-employees/:id',
-            name: 'MyEmployee',
-            component: () => import('./views/admin/MyEmployee.vue')
-        },
-        {
-            path: '/admin/units',
-            name: 'Units',
-            component: () => import('./views/admin/Units.vue')
-        },
-        {
-            path: '/admin/my-units/:id',
-            name: 'MyUnit',
-            component: () => import('./views/admin/MyUnit.vue')
-        },
-        {
-            path: '/admin/login',
-            name: 'Login',
-            component: () => import('./views/admin/Login.vue')
         },
         {
             path: '/restaurants',

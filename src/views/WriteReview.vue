@@ -64,6 +64,7 @@
                 this.form.email = this.review.email;
                 this.form.code = this.review.code;
                 konobarApi.post('reviews', this.form).then( response => {
+
                     if (response.status === 201) {
                         this.$router.push({name: 'Thanks'});
                     }

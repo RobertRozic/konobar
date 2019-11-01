@@ -1,6 +1,8 @@
 <template>
     <b-container v-if="item" data-aos="fade" data-aos-duration="700" fluid class="staff-member w-100 py-3 my-3">
-        <img v-if="item.images.length > 0" :src="storage + item.images[0].path" alt="Staff photo" class="staff-photo">
+        <div class="staff-photo">
+            <b-img v-if="item.images.length > 0" :src="storage + item.images[0].path" fluid alt="Staff photo"></b-img>
+        </div>
         <div class="staff-details w-100  ml-3 flex-center">
             <p class="m-0 w-100 text-left">{{item.title}}</p>
             <h5 class="w-100 text-left">{{item.full_name}}</h5>
@@ -34,10 +36,12 @@
         text-decoration: none!important;
     }
     .staff-photo {
-        max-height: 50px;
-        max-width: 50px;
-        object-fit: cover;
-        border-radius: 50%;
+        img {
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     }
     .staff-details {
         flex-direction: column;

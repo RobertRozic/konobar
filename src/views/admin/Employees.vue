@@ -27,6 +27,7 @@
                                 :items="employees"
                                 :fields="fields"
                                 :search-keys="searchKeys"
+                                @rowClicked="editEmployee"
                                 class="white-bg">
                         </konobar-table>
                     </b-col>
@@ -45,6 +46,20 @@
                     @success="formSuccess">
             </konobar-form>
         </b-modal>
+        <b-modal centered
+                 hide-footer
+                 ref="edit-employee"
+                 title="Edit employee"
+                 id="edit-employee">
+            <konobar-form
+                    v-if="selectedEmployee"
+                    :fields="formFields"
+                    submit="Update"
+                    :post="'employees' + '/' + selectedEmployee.id"
+                    :item="selectedEmployee"
+                    @success="formSuccess">
+            </konobar-form>
+        </b-modal>
     </div>
 </template>
 
@@ -52,6 +67,7 @@
     export default {
         data() {
             return {
+                selectedEmployee: null,
                 employees: [],
                 units: [],
                 fields: [
@@ -129,6 +145,12 @@
             formSuccess() {
                 this.getEmployees();
                 this.$refs['new-employee'].hide();
+                this.$refs['edit-employee'].hide();
+            },
+            editEmployee(id) {
+                this.formFields[4].required = false;
+                this.selectedEmployee = this.employees.find(employee => {return employee.id === id});
+                this.$refs['edit-employee'].show();
             }
         },
         created() {

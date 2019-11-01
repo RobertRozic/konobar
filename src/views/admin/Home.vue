@@ -26,6 +26,7 @@
                         :items="users"
                         :fields="fields"
                         :search-keys="searchKeys"
+                        @rowClicked="editUser"
                         class="white-bg">
                 </konobar-table>
             </b-col>
@@ -39,6 +40,20 @@
                               @success="formSuccess">
                 </konobar-form>
             </b-modal>
+            <b-modal centered
+                     hide-footer
+                     ref="edit-user"
+                     title="Edit user"
+                     id="edit-user">
+                <konobar-form
+                        v-if="selectedUser"
+                        :fields="formFields"
+                        submit="Update"
+                        :post="'users' + '/' + selectedUser.id"
+                        :item="selectedUser"
+                        @success="formSuccess">
+                </konobar-form>
+            </b-modal>
         </b-row>
     </b-container>
 </template>
@@ -48,6 +63,7 @@
         name: 'dashboard',
         data() {
             return {
+                selectedUser: null,
                 units: [],
                 users: [],
                 fields: [
@@ -133,6 +149,14 @@
             formSuccess() {
                 this.getUsers();
                 this.$refs['new-user'].hide();
+                this.$refs['edit-user'].hide();
+
+            },
+            editUser(id) {
+                this.formFields[3].required = false;
+                this.formFields[4].required = false;
+                this.selectedUser = this.users.find(user => {return user.id === id});
+                this.$refs['edit-user'].show();
             }
         },
         created() {

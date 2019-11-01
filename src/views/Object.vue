@@ -31,6 +31,7 @@
                 <employee v-for="member in unit.employees"
                           @click.native="employeeClick(member.id)"
                           v-b-modal.credentials
+                          :key="member.id"
                           :item="member"></employee>
             </b-container>
         </div>
@@ -40,6 +41,12 @@
                 <input type="email" v-model="form.email" name="email" class="modal-input" placeholder="E-mail">
                 <button type="submit" class="btn btn-warning continue-btn">Continue</button>
             </b-form>
+        </b-modal>
+        <b-modal id="error_permission"
+                 hide-footer centered
+                 ref="errorRef"
+                 title="You have already rated this object or employee!">
+            Please rate other employees or units. Thanks.
         </b-modal>
     </div>
 </template>
@@ -54,9 +61,6 @@
             }
         },
         methods : {
-            hideCredentialsModal() {
-                this.$refs.credentialsRef.hide()
-            },
             employeeClick(id) {
                 this.form.unit_id = null;
                 this.form.employee_id = id;
@@ -69,11 +73,12 @@
                 konobarApi.post('/reviews/permission', this.form).then(response => {
                     if (response.status === 200) {
                         let data = response.data;
+                        this.$refs.credentialsRef.hide();
                         if (data.permission) {
                             this.$store.dispatch('setReview', response.data);
                             this.$router.push('/review');
                         } else {
-                            console.log("Error!");
+                            this.$refs.errorRef.show();
                         }
                     }
                 });
