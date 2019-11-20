@@ -20,13 +20,16 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Accept'] = 'application/json';
 
+// Localization
+import i18n from './setup/i18n'
+
 // API
 import * as api from './api.js'
 window.api = api;
 
 window.konobarApi = axios.create({
-  baseURL: api.apiDomain,
-  timeout: 5000
+    baseURL: api.apiDomain,
+    timeout: 5000
 });
 
 // Event bus
@@ -36,10 +39,11 @@ window.eventBus = new Vue();
 import '@/components'
 
 new Vue({
-  created() {
-		AOS.init();
-	},
-  router,
-  store,
-  render: h => h(App)
+    created() {
+        AOS.init();
+    },
+    router,
+    store,
+    i18n,
+    render: h => h(App)
 }).$mount('#app');

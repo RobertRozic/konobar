@@ -17,6 +17,11 @@
             }
         },
         created() {
+            // Set previous lang
+            let locale = this.$cookie.get('lang');
+            if (locale != null)
+                this.$i18n.locale = locale;
+
             let self = this;
             konobarApi.interceptors.request.use(
                 (config) => {

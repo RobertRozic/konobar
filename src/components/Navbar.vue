@@ -3,7 +3,7 @@
         <b-container fluid class="px-3 nav1">
             <b-row>
                 <b-col cols="4" offset="4" class="flex-center">
-                    <router-link to="/"><h5 class="brand-name m-0">ratemate</h5></router-link>
+                    <router-link to="/"><h5 class="brand-name m-0">Ratemate</h5></router-link>
                 </b-col>
                 <b-col cols="4" class="flex-center">
                     <b-dropdown v-if="user" variant="div" right no-caret>
@@ -14,7 +14,12 @@
                             Admin
                         </b-dropdown-item>
                         <b-dropdown-item @click="logout">
-                            Odjava
+                            {{$t('logout')}}
+                        </b-dropdown-item>
+                    </b-dropdown>
+                    <b-dropdown size="sm" :text="$i18n.locale"  class="lang-dropdown">
+                        <b-dropdown-item v-for="lang in langs" :key="lang" @click="setLang(lang)">
+                            {{ lang }}
                         </b-dropdown-item>
                     </b-dropdown>
                 </b-col>
@@ -25,7 +30,7 @@
                 <b-col v-for="item in nav"
                        :key="item.title" cols="4" class="white text-center">
                     <router-link :to="item.href" class="menu-item">
-                        {{ item.title }}
+                        {{ $t(item.title) }}
                     </router-link>
                 </b-col>
             </b-row>
@@ -37,6 +42,7 @@
     export default {
         data() {
             return {
+                langs: ['hr', 'en'],
                 items: {
                     admin: [
                         {
@@ -64,15 +70,15 @@
                     ],
                     guest: [
                         {
-                            title: 'Restaurants',
+                            title: 'restaurants',
                             href: '/restaurants'
                         },
                         {
-                            title: 'Caffe Bars',
+                            title: 'caffe_bars',
                             href: '/caffe-bars'
                         },
                         {
-                            title: 'Bars',
+                            title: 'bars',
                             href: '/bars'
                         }
                     ]
@@ -109,12 +115,17 @@
             },
             goToAdmin() {
                 this.$router.push('/admin');
+            },
+            setLang(locale) {
+                this.$i18n.locale = locale;
+                this.$cookie.set('lang', locale);
+                // Lang cookie
             }
         }
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .brand-name {
         font-family: 'Rubik', sans-serif;
     }
@@ -142,5 +153,15 @@
     }
     .white, .router-link-exact-active{
         color: #FFF;
+    }
+
+    .lang-dropdown {
+        background: transparent;
+        text-transform: uppercase !important;
+        button {
+            background: transparent;
+
+            text-transform: uppercase !important;
+        }
     }
 </style>
