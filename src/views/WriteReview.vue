@@ -2,12 +2,12 @@
     <div class="flat-wrap" v-if="employee || unit">
         <div class="obj-nav">
             <i @click="$router.go(-1)" class="fas fa-arrow-left"></i>
-            <p class="m-0">Rate our
+            <p class="m-0">{{$t('rate_our')}}
                 <template v-if="employee">
-                    employee
+                    {{$tc('employee', 1)}}
                 </template>
                 <template v-else-if="unit">
-                    object
+                    {{$tc('unit', 1)}}
                 </template>
             </p>
             <span></span>
@@ -18,7 +18,7 @@
                 <h5>{{employee.full_name}}</h5>
                 <p class="job-title">{{employee.title}}</p>
             </template>
-            <p class="mt-4 mb-0">How was your experience?</p>
+            <p class="mt-4 mb-0">{{$t('experience')}}</p>
             <div class="stars my-3 w-100 text-center">
                 <i v-for="i in 5"
                    @click="form.rating = i"
@@ -27,8 +27,8 @@
             </div>
             <div class="staff-review-wrap mt-4 w-100 p-3">
                 <b-form v-on:submit.prevent="submitReview">
-                    <textarea name="message" v-model="form.message" rows="8" class="obj-review mb-4" placeholder="Write a review..."></textarea>
-                    <b-btn type="submit" class="btn btn-warning continue-btn">Submit</b-btn>
+                    <textarea name="message" v-model="form.message" rows="8" class="obj-review mb-4" :placeholder="$t('write_review')"></textarea>
+                    <b-btn type="submit" class="btn btn-warning continue-btn">{{$t('submit')}}</b-btn>
                 </b-form>
             </div>
         </div>

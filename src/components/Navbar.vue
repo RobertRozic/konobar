@@ -30,7 +30,7 @@
                 <b-col v-for="item in nav"
                        :key="item.title" cols="4" class="white text-center">
                     <router-link :to="item.href" class="menu-item">
-                        {{ $t(item.title) }}
+                        {{ item.title }}
                     </router-link>
                 </b-col>
             </b-row>
@@ -46,39 +46,39 @@
                 items: {
                     admin: [
                         {
-                            title: 'users',
+                            title: this.$i18n.tc('user', 2),
                             href: '/admin'
                         },
                         {
-                            title: 'units',
+                            title: this.$i18n.tc('unit', 2),
                             href: '/admin/units'
                         },
                         {
-                            title: 'employees',
+                            title: this.$i18n.tc('employee', 2),
                             href: '/admin/employees'
                         }
                     ],
                     owner: [
                         {
-                            title: 'dashboard',
+                            title: this.$i18n.t('dashboard'),
                             href: '/admin'
                         },
                         {
-                            title: 'employees',
+                            title: this.$i18n.tc('employee', 2),
                             href: '/admin/employees'
                         }
                     ],
                     guest: [
                         {
-                            title: 'restaurants',
+                            title: this.$i18n.tc('restaurant', 2),
                             href: '/restaurants'
                         },
                         {
-                            title: 'caffe_bars',
+                            title: this.$i18n.tc('caffe_bar', 2),
                             href: '/caffe-bars'
                         },
                         {
-                            title: 'bars',
+                            title: this.$i18n.tc('bar', 2),
                             href: '/bars'
                         }
                     ]

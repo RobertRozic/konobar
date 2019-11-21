@@ -1,8 +1,8 @@
 <template>
     <b-container v-if="user"  class="curved-wrap p-4">
-        <b-row v-if="user.role_id === 1">
-            <h5 class="font-weight-bold" >Hi {{user.first_name}},</h5>
-            <h6>let's check what is new today</h6>
+        <b-row v-if="user.role_id === 1" class="flex-column">
+            <h5 class="font-weight-bold" >{{$t('hello')}} {{user.first_name}},</h5>
+            <h6>{{$t('what_is_new')}}</h6>
             <router-link v-for="unit in units"
                          :key="unit.name"
                          :to="'admin/my-units/' + unit.id"
@@ -13,11 +13,11 @@
         </b-row>
         <b-row v-else-if="user.role_id === 2">
             <b-col cols="12" class="p-2 d-flex justify-content-between">
-                <h1 class="text-white">Users</h1>
+                <h1 class="text-white">{{$tc('user', 2)}}</h1>
                 <div class="w-25 flex-center">
                     <b-btn variant="primary"
                            class="w-100"
-                           v-b-modal.new-user>New</b-btn>
+                           v-b-modal.new-user>{{$t('new')}}</b-btn>
                 </div>
             </b-col>
             <b-col>
@@ -35,7 +35,7 @@
                      title="New user"
                      id="new-user">
                 <konobar-form :fields="formFields"
-                              submit="Create"
+                              :submit="$t('create')"
                               post="register"
                               @success="formSuccess">
                 </konobar-form>
@@ -48,7 +48,7 @@
                 <konobar-form
                         v-if="selectedUser"
                         :fields="formFields"
-                        submit="Update"
+                        :submit="$t('update')"
                         :post="'users' + '/' + selectedUser.id"
                         :item="selectedUser"
                         @success="formSuccess">
@@ -68,14 +68,17 @@
                 users: [],
                 fields: [
                     {
+                        label: this.$i18n.t('first_name'),
                         key: 'first_name',
                         sortable: true
                     },
                     {
+                        label: this.$i18n.t('last_name'),
                         key: 'last_name',
                         sortable: true
                     },
                     {
+                        label: this.$i18n.t('email'),
                         key: 'email',
                         sortable: true
                     }
@@ -87,42 +90,42 @@
                 formFields: [
                     {
                         key: 'first_name',
-                        label: 'First name',
+                        label: this.$i18n.t('first_name'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'last_name',
-                        label: 'Last name',
+                        label: this.$i18n.t('last_name'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'email',
-                        label: 'Email',
+                        label: this.$i18n.t('email'),
                         type: 'email',
                         required: true
                     },
                     {
                         key: 'password',
-                        label: 'Password',
+                        label: this.$i18n.t('password'),
                         type: 'password',
                         required: true
                     },
                     {
                         key: 'password_confirmation',
-                        label: 'Password confirm',
+                        label: this.$i18n.t('password_confirm'),
                         type: 'password',
                         required: true
                     },
                     {
                         key: 'role_id',
-                        label: 'Role',
+                        label: this.$i18n.t('role'),
                         type: 'select',
                         required: true,
                         options: [
-                            {value: 1, text:'Owner'},
-                            {value: 2, text:'Administrator'},
+                            {value: 1, text: this.$i18n.t('owner')},
+                            {value: 2, text: this.$i18n.t('admin')},
                         ]
                     },
                 ]

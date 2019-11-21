@@ -28,8 +28,6 @@
 </script>
 
 <style lang="scss" scoped>
-    //HERE BECAUSE VUE TAKES A SHIT WITH BACKGROUND IMAGE LINKS
-    /// Fix this
     .unit {
         background-size: cover;
         background-repeat: no-repeat;

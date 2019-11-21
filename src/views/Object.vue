@@ -2,7 +2,7 @@
     <div class="flat-wrap" v-if="unit">
         <div class="obj-nav">
             <i @click="$router.go(-1)" class="fas fa-arrow-left"></i>
-            <p class="m-0">Rate us</p>
+            <p class="m-0">{{$t('rate_us')}}</p>
             <span></span>
         </div>
         <div class="obj-wrap">
@@ -22,12 +22,12 @@
                     <i v-for="i in Math.floor(unit.average_rating)" class="fas fa-star yellow"></i>
                     <i v-for="i in (5 - Math.floor(unit.average_rating))"class="fas fa-star gray"></i>
                 </div>
-                <p class="review-num m-0">{{unit.review_count}} reviews</p>
+                <p class="review-num m-0">{{$tc('review', unit.review_count)}}</p>
             </div>
-            <b-btn variant="warning" class="w-100 rate-btn my-4" @click="unitClick" v-b-modal.credentials>Rate object</b-btn>
+            <b-btn variant="warning" class="w-100 rate-btn my-4" @click="unitClick" v-b-modal.credentials>{{$t('rate_object')}}</b-btn>
             <b-container fluid class="employees-wrap mt-4 p-0 w-100 d-flex">
-                <p class="mb-0 mt-4">Employees</p>
-                <h5 class="mb-4">Rate our service</h5>
+                <p class="mb-0 mt-4">{{$tc('employee', 2)}}</p>
+                <h5 class="mb-4">{{$t('rate_service')}}</h5>
                 <employee v-for="member in unit.employees"
                           @click.native="employeeClick(member.id)"
                           v-b-modal.credentials
@@ -35,18 +35,18 @@
                           :item="member"></employee>
             </b-container>
         </div>
-        <b-modal id="credentials" hide-footer centered ref="credentialsRef" title="Please enter your code and email.">
+        <b-modal id="credentials" hide-footer centered ref="credentialsRef" :title="$t('enter_code_email')">
             <b-form v-on:submit.prevent="verifyRate">
-                <input type="text" v-model="form.code" name="code" class="modal-input" placeholder="Code">
-                <input type="email" v-model="form.email" name="email" class="modal-input" placeholder="E-mail">
-                <button type="submit" class="btn btn-warning continue-btn">Continue</button>
+                <input type="text" v-model="form.code" name="code" class="modal-input" :placeholder="$t('code')">
+                <input type="email" v-model="form.email" name="email" class="modal-input" :placeholder="$t('email')">
+                <button type="submit" class="btn btn-warning continue-btn">{{$t('continue')}}</button>
             </b-form>
         </b-modal>
         <b-modal id="error_permission"
                  hide-footer centered
                  ref="errorRef"
-                 title="You have already rated this object or employee!">
-            Please rate other employees or units. Thanks.
+                 :title="$t('rate_error')">
+            {{$t('rate_other')}}
         </b-modal>
     </div>
 </template>

@@ -3,14 +3,14 @@
         <template v-if="!loading">
             <template v-if="verified">
                 <img src="../assets/images/thanks.png" alt="Thank you!">
-                <h5 class="mt-2">Thank you for verifying your rating!</h5>
-                <p class="mb-5">We will do everything we can to improve our services.</p>
+                <h5 class="mt-2">{{$t('thank_verify')}}</h5>
+                <p class="mb-5">{{$t('thank_you_2')}}</p>
             </template>
             <template v-else>
-                <h5 class="mt-2">Something went wrong!</h5>
+                <h5 class="mt-2">{{$t('something_wrong')}}</h5>
             </template>
         </template>
-        <router-link :to="'/'" class="btn btn-warning">Home</router-link>
+        <router-link :to="'/'" class="btn btn-warning">{{$t('home')}}</router-link>
     </div>
 </template>
 

@@ -2,11 +2,11 @@
     <b-container>
         <b-row>
             <b-col cols="12" class="p-2 d-flex justify-content-between">
-                <h1 class="text-white">Units</h1>
+                <h1 class="text-white">{{$tc('unit', 2)}}</h1>
                 <div class="w-25 flex-center" v-if="user.role_id === 2">
                     <b-btn variant="primary"
                            class="w-100"
-                           v-b-modal.new-unit>New</b-btn>
+                           v-b-modal.new-unit>{{$t('new')}}</b-btn>
                 </div>
             </b-col>
             <b-col>
@@ -25,10 +25,10 @@
                     centered
                     hide-footer
                     ref="new-unit"
-                    title="New unit"
+                    :title="$t('new_unit')"
                     id="new-unit">
                 <konobar-form :fields="formFields"
-                              submit="Create"
+                              :submit="$t('submit')"
                               post="units"
                               @success="formSuccess">
                 </konobar-form>
@@ -36,12 +36,12 @@
             <b-modal centered
                      hide-footer
                      ref="edit-unit"
-                     title="Edit unit"
+                     :title="$t('edit_unit')"
                      id="edit-unit">
                 <konobar-form
                         v-if="selectedUnit"
                         :fields="formFields"
-                        submit="Update"
+                        :submit="$t('update')"
                         :post="'units' + '/' + selectedUnit.id"
                         :item="selectedUnit"
                         @success="formSuccess">
@@ -62,18 +62,21 @@
                 fields: [
                     {
                         key: 'name',
+                        label: this.$i18n.t('name'),
                         sortable: true
                     },
                     {
-                        label: 'Grad',
+                        label: this.$i18n.t('township'),
                         key: 'township.name',
                         sortable: true
                     },
                     {
+                        label: this.$i18n.t('address'),
                         key: 'address',
                         sortable: true
                     },
                     {
+                        label: this.$i18n.t('code'),
                         key: 'code',
                         sortable: true
                     }
@@ -85,50 +88,50 @@
                 formFields: [
                     {
                         key: 'type',
-                        label: 'Type',
+                        label: this.$i18n.t('type'),
                         type: 'select',
                         required: true,
                         options: [
-                            {value: 1, text: 'Restaurant'},
-                            {value: 2, text: 'Caffe Bar'},
-                            {value: 3, text: 'Bar'}
+                            {value: 1, text: this.$i18n.tc('restaurant', 1)},
+                            {value: 2, text: this.$i18n.tc('caffe_bar', 1),},
+                            {value: 3, text: this.$i18n.tc('bar', 1),}
                         ]
                     },
                     {
                         key: 'owner_id',
-                        label: 'Owner',
+                        label: this.$i18n.t('owner'),
                         type: 'select',
                         required: true,
                         options: []
                     },
                     {
                         key: 'name',
-                        label: 'Name',
+                        label: this.$i18n.t('name'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'address',
-                        label: 'Address',
+                        label: this.$i18n.t('address'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'township_id',
-                        label: 'Township',
+                        label: this.$i18n.t('township'),
                         type: 'select',
                         required: true,
                         options: []
                     },
                     {
                         key: 'code',
-                        label: 'Code',
+                        label: this.$i18n.t('code'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'images',
-                        label: 'Images',
+                        label: this.$i18n.t('images'),
                         type: 'file',
                         multiple: true,
                         //required: true

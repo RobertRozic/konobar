@@ -1,8 +1,8 @@
 <template>
     <div v-if="user">
         <div v-if="user.role_id === 1" class="curved-wrap p-4 position-relative">
-            <router-link v-for="item in employees" :to="$route.path + '/' + item.id" :key="item.full_name">
-                <employee  :item="item"></employee>
+            <router-link v-for="item in employees" :to="$route.path + '/' + item.id" :key="item.full_name + item.id">
+                <employee :item="item"></employee>
             </router-link>
             <b-btn variant="primary"
                    class="add-fab"
@@ -14,11 +14,11 @@
             <b-container>
                 <b-row>
                     <b-col cols="12" class="p-2 d-flex justify-content-between">
-                        <h1 class="text-white">Employees</h1>
+                        <h1 class="text-white">{{$tc('employee', 2)}}</h1>
                         <div class="w-25 flex-center">
                             <b-btn variant="primary"
                                    class="w-100"
-                                   v-b-modal.new-employee>New</b-btn>
+                                   v-b-modal.new-employee>{{$t('new')}}</b-btn>
                         </div>
                     </b-col>
                     <b-col>
@@ -37,11 +37,11 @@
         <b-modal centered
                  hide-footer
                  ref="new-employee"
-                 title="New employee"
+                 :title="$t('new_employee')"
                  id="new-employee">
             <konobar-form
                     :fields="formFields"
-                    submit="Create"
+                    :submit="$t('create')"
                     post="employees"
                     @success="formSuccess">
             </konobar-form>
@@ -49,12 +49,12 @@
         <b-modal centered
                  hide-footer
                  ref="edit-employee"
-                 title="Edit employee"
+                 :title="$t('edit_employee')"
                  id="edit-employee">
             <konobar-form
                     v-if="selectedEmployee"
                     :fields="formFields"
-                    submit="Update"
+                    :submit="$t('update')"
                     :post="'employees' + '/' + selectedEmployee.id"
                     :item="selectedEmployee"
                     @success="formSuccess">
@@ -72,18 +72,22 @@
                 units: [],
                 fields: [
                     {
+                        label: this.$i18n.t('first_name'),
                         key: 'first_name',
                         sortable: true
                     },
                     {
+                        label: this.$i18n.t('last_name'),
                         key: 'last_name',
                         sortable: true
                     },
                     {
+                        label: this.$i18n.t('title'),
                         key: 'title',
                         sortable: true
                     },
                     {
+                        label: this.$i18n.t('average_rating'),
                         key: 'average_rating',
                         sortable: true
                     }
@@ -96,32 +100,32 @@
                 formFields: [
                     {
                         key: 'unit_id',
-                        label: 'Unit',
+                        label: this.$i18n.tc('unit', 1),
                         type: 'select',
                         required: true,
                         options: []
                     },
                     {
                         key: 'first_name',
-                        label: 'First name',
+                        label: this.$i18n.t('first_name'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'last_name',
-                        label: 'Last name',
+                        label: this.$i18n.t('last_name'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'title',
-                        label: 'Title',
+                        label: this.$i18n.t('title'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'images',
-                        label: 'Images',
+                        label: this.$i18n.t('images'),
                         type: 'file',
                         multiple: true,
                         required: true

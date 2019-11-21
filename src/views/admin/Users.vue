@@ -2,11 +2,11 @@
     <b-container>
         <b-row>
             <b-col cols="12" class="p-2 d-flex justify-content-between">
-                <h1 class="text-white">Users</h1>
+                <h1 class="text-white">{{$t('users')}}</h1>
                 <div class="w-25 flex-center">
                     <b-btn variant="primary"
                            class="w-100"
-                           v-b-modal.new-user>New</b-btn>
+                           v-b-modal.new-user>{{$t('new')}}</b-btn>
                 </div>
             </b-col>
             <b-col>
@@ -21,10 +21,10 @@
             </b-col>
             <b-modal centered
                      ref="new-user"
-                     title="New user"
+                     :title="$t('new_user')"
                      id="new-user">
                 <konobar-form :fields="formFields"
-                              submit="Create"
+                              :submit="$t('create')"
                               post="register"
                               @success="formSuccess">
                 </konobar-form>
@@ -32,12 +32,12 @@
             <b-modal centered
                      hide-footer
                      ref="edit-user"
-                     title="Edit user"
+                     :title="$t('edit_user')"
                      id="edit-user">
                 <konobar-form
                         v-if="selectedUser"
                         :fields="formFields"
-                        submit="Update"
+                        :submit="$t('update')"
                         :post="'users' + '/' + selectedUser.id"
                         :item="selectedUser"
                         @success="formSuccess">
@@ -56,14 +56,17 @@
                 fields: [
                     {
                         key: 'first_name',
+                        label: this.$i18n.t('first_name'),
                         sortable: true
                     },
                     {
                         key: 'last_name',
+                        label: this.$i18n.t('last_name'),
                         sortable: true
                     },
                     {
                         key: 'email',
+                        label: this.$i18n.t('email'),
                         sortable: true
                     }
                 ],
@@ -74,42 +77,42 @@
                 formFields: [
                     {
                         key: 'first_name',
-                        label: 'First name',
+                        label: this.$i18n.t('first_name'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'last_name',
-                        label: 'Last name',
+                        label: this.$i18n.t('last_name'),
                         type: 'text',
                         required: true
                     },
                     {
                         key: 'email',
-                        label: 'Email',
+                        label: this.$i18n.t('email'),
                         type: 'email',
                         required: true
                     },
                     {
                         key: 'password',
-                        label: 'Password',
+                        label: this.$i18n.t('password'),
                         type: 'password',
                         required: true
                     },
                     {
                         key: 'password_confirmation',
-                        label: 'Password confirm',
+                        label: this.$i18n.t('password_confirm'),
                         type: 'password',
                         required: true
                     },
                     {
                         key: 'role_id',
-                        label: 'Role',
+                        label: this.$i18n.t('role'),
                         type: 'select',
                         required: true,
                         options: [
-                            {value: 2, text:'Owner'},
-                            {value: 1, text:'Administrator'},
+                            {value: 2, text: this.$i18n.t('owner')},
+                            {value: 1, text: this.$i18n.t('admin')},
                         ]
                     },
                 ]

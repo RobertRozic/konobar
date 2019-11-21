@@ -1,6 +1,6 @@
 <template>
     <div class="curved-wrap">
-        <router-link v-for="item in restaurants" :to="{name: 'Place', params: {id: item.id}}">
+        <router-link v-for="item in restaurants" :key="item.id" :to="{name: 'Place', params: {id: item.id}}">
             <unit :item="item"></unit>
         </router-link>
     </div>

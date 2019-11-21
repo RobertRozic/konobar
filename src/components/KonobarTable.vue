@@ -2,7 +2,7 @@
     <div class="p-2">
         <b-row v-if="searchKeys.length > 0">
             <b-col lg="6" xl="4">
-                <b-input-group class="w-100 my-2" prepend="Pretraži">
+                <b-input-group class="w-100 my-2" :prepend="$t('search')">
                     <b-form-input type="text" v-model="searchText"></b-form-input>
                     <b-input-group-append>
                         <b-btn><span class="fa fa-search"></span></b-btn>
@@ -14,7 +14,7 @@
             <b-col cols="12">
                 <b-table striped hover responsive
                          show-empty
-                         empty-text="Nema podataka za prikaz"
+                         :empty-text="$t('empty')"
                          :items="filterItems"
                          :fields="columns"
                          class="text-center konobar-table align-middle"
@@ -43,11 +43,6 @@
                         :per-page="perPage">
                 </b-pagination>
             </b-col>
-            <!--<b-col>
-                <div class="text-right print-show w-100">
-                    Stranica {{currentPage}} od {{totalPages}}
-                </div>
-            </b-col>-->
         </b-row>
     </div>
 </template>
@@ -106,9 +101,6 @@
                 } else {
                     return this.items;
                 }
-            },
-            totalPages() {
-                return Math.ceil(this.filterItems.length / this.perPage);
             }
         },
         mounted() {

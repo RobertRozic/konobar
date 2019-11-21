@@ -6,9 +6,9 @@
                     <!--<div class="text-center">
                         <b-img src="" fluid class="mb-4"></b-img>
                     </div>-->
-                    <h1 class="text-center mb-3">RATEMATE</h1>
+                    <h1 class="text-center mb-3">Ratemate</h1>
                     <konobar-form :fields="fields"
-                                  submit="Login"
+                                  :submit="$t('login')"
                                   post="login"
                                   @success="$router.push('/admin')">
                     </konobar-form>
@@ -25,13 +25,13 @@
                 fields: [
                     {
                         key: 'username',
-                        label: 'Email',
+                        label: this.$i18n.t('email'),
                         type: 'email',
                         required: true
                     },
                     {
                         key: 'password',
-                        label: 'Password',
+                        label: this.$i18n.t('password'),
                         type: 'password',
                         required: true
                     }

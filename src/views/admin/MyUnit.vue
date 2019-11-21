@@ -1,9 +1,9 @@
 <template>
     <div v-if="unit">
         <div class="curved-wrap">
-            <div class="obj-nav flex-center">
+            <div class="obj-nav flex-center justify-content-between">
                 <i @click="$router.go(-1)" class="fas fa-arrow-left"></i>
-                <p class="m-0">Overview</p>
+                <p class="m-0">{{$t('overview')}}</p>
                 <span></span>
             </div>
             <div class="flex-center flex-column">
@@ -11,9 +11,10 @@
             </div>
         </div>
         <div class="curved-wrap bg-blue flex-grow-1 p-3">
-            <h6 class="font-weight-bold">Comments and ratings.</h6>
-            <div>Read all comments from this month.</div>
+            <h6 class="font-weight-bold">{{$t('comments_ratings')}}</h6>
+            <div>{{$t('read_all')}}</div>
             <review v-for="review in unit.reviews"
+                    :key="review.id"
                     :item="review"
                     class="my-3">
             </review>

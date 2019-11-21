@@ -15,7 +15,7 @@ export default [
         component: () => import('./Employees.vue')
     },
     {
-        path: '/admin/my-employees/:id',
+        path: '/admin/employees/:id',
         name: 'MyEmployee',
         component: () => import('./MyEmployee.vue')
     },
